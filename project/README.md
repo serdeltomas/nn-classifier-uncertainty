@@ -1,3 +1,3 @@
-# Cifar10 with WRN 🌁
+# OpenMax on WRN trained on Cifar10
 
-This folder contains a simple Wide-ResNet implementation that can be trained on Cifar10 with SAM. Start the training by running `python3 train.py`
+Theres a bunch of files in here that do stuff...

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="added img files for SAM">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_SAM.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/openmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/openmax.py" afterDir="false" />
+    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="first commit">
+      <change beforePath="$PROJECT_DIR$/project/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/project/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +298,28 @@
       <option name="project" value="LOCAL" />
       <updated>1613592120308</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="removed some comments">
+      <created>1613592258959</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1613592258959</updated>
+    </task>
+    <task id="LOCAL-00008" summary="renamed file">
+      <created>1613592274064</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1613592274064</updated>
+    </task>
+    <task id="LOCAL-00009" summary="first commit">
+      <created>1613592332343</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1613592332343</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,9 +335,11 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="first commit" />
     <MESSAGE value="added img files for SAM" />
-    <option name="LAST_COMMIT_MESSAGE" value="added img files for SAM" />
+    <MESSAGE value="removed some comments" />
+    <MESSAGE value="renamed file" />
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
