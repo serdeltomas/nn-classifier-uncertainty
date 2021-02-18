@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="changed text">
+    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="edited file name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/evaluate_openmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/evaluate_openmax.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,11 +32,14 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tommy\Desktop\python\nn-classifier-uncertainty\project" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Tommy\Desktop\python\sam-main\example" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.read_npy_files (1)">
+  <component name="RunManager" selected="Python.evaluate_openmax">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Uncertainty in neural network classifiers" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -57,19 +61,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="get_cifar10_100 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Uncertainty in neural network classifiers" />
+    <configuration name="evaluate_openmax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nn-classifier-uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example/get_cifar10_100.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/evaluate_openmax.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,19 +145,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="read_npy_files" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Uncertainty in neural network classifiers" />
+    <configuration name="txt_csv_editor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nn-classifier-uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project/results" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example/read_npy_files.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/results/txt_csv_editor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -239,11 +243,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.evaluate_openmax" />
+        <item itemvalue="Python.txt_csv_editor" />
         <item itemvalue="Python.read_npy_files (1)" />
         <item itemvalue="Python.get_cifar10_100 (2)" />
         <item itemvalue="Python.openmax" />
-        <item itemvalue="Python.read_npy_files" />
-        <item itemvalue="Python.get_cifar10_100 (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +330,21 @@
       <option name="project" value="LOCAL" />
       <updated>1613592688422</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="edited file name">
+      <created>1613644707653</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1613644707653</updated>
+    </task>
+    <task id="LOCAL-00012" summary="edited file name">
+      <created>1613644717164</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1613644717164</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,7 +365,8 @@
     <MESSAGE value="renamed file" />
     <MESSAGE value="first commit" />
     <MESSAGE value="changed text" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed text" />
+    <MESSAGE value="edited file name" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited file name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -401,6 +420,31 @@
           <url>file://$PROJECT_DIR$/project/openmax.py</url>
           <line>109</line>
           <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
+          <line>101</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
+          <line>133</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
+          <line>134</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
