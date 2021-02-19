@@ -110,7 +110,7 @@ def save_om_sm():
                                  np.load("preprocessing/c10_test_pred.npy", allow_pickle=True)), axis=0)
     mav = np.load("preprocessing/mav_c10_train.npy", allow_pickle=True)
 
-    for tail_size in range(1, 31):
+    for tail_size in range(2, 31):
         weibull_model = weibull_tailfit(tail_size)
         for alpha in range(1, 9):
             openmax, softmax = [], []

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="edited file name">
+    <list default="true" id="4767647f-d3c1-4f05-bbcf-8b50c610e301" name="Default Changelist" comment="auroc calculations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/evaluate_openmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/evaluate_openmax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/openmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/openmax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/read_npy_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/read_npy_files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/results/first_testing_results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/results/first_testing_results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/results/txt_csv_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/results/txt_csv_editor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,15 +129,15 @@
       <method v="2" />
     </configuration>
     <configuration name="read_npy_files (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Uncertainty in neural network classifiers" />
+      <module name="nn-classifier-uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Tommy\AppData\Local\Programs\Python\Python38\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/read_npy_files.py" />
@@ -344,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613644717164</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="auroc calculations">
+      <created>1613686480366</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1613686480366</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -366,7 +377,8 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="changed text" />
     <MESSAGE value="edited file name" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited file name" />
+    <MESSAGE value="auroc calculations" />
+    <option name="LAST_COMMIT_MESSAGE" value="auroc calculations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -423,28 +435,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
           <line>101</line>
           <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
-          <line>133</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
-          <line>134</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/evaluate_openmax.py</url>
-          <line>113</line>
-          <option name="timeStamp" value="98" />
+          <line>202</line>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
