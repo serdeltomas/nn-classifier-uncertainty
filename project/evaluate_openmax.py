@@ -104,9 +104,8 @@ def compute_auroc_old(om_sm, targets):
 # -------------------------------------------------------------------------------------------------------------------
 
 
-def compute_auroc(topk, is_positive):
+def compute_auroc(is_positive, is_rejected):
     fpr, tpr = [], []
-    is_rejected = is_rejected_all(topk)
 
     for epsilon in range(101):
         tp, tn, fp, fn = 0, 0, 0, 0
@@ -132,7 +131,7 @@ def compute_auroc(topk, is_positive):
             tpr.append(tp / (tp + fn))
 
     auroc = slm.auc(fpr, tpr)
-    return auroc, is_rejected
+    return auroc
 # -------------------------------------------------------------------------------------------------------------------
 
 
@@ -144,7 +143,7 @@ def is_rejected_one(position, value, epsilon):
 def is_rejected_over_epsilon(position, value):
     is_rej = []
     for epsilon in range(101):
-        is_rej.append(is_rejected_one(position, value, epsilon/100.0))
+        is_rej.append((position == 10 or value < epsilon/100.0))
     return np.asarray(is_rej)
 # -------------------------------------------------------------------------------------------------------------------
 
@@ -152,7 +151,10 @@ def is_rejected_over_epsilon(position, value):
 def is_rejected_all(topk):
     is_rej_all = []
     for topk_val, topk_pos in zip(topk[0], topk[1]):
-        is_rej_all.append(is_rejected_over_epsilon(topk_pos, topk_val))
+        is_rej = []
+        for epsilon in range(101):
+            is_rej.append((topk_pos == 10 or topk_val < (epsilon / 100.0)))
+        is_rej_all.append(np.asarray(is_rej))
     is_rej_all = np.asarray(is_rej_all)
     return is_rej_all.T
 # -------------------------------------------------------------------------------------------------------------------
@@ -169,37 +171,40 @@ def is_positive_all(targets):
 # -------------------------------------------------------------------------------------------------------------------
 
 
+def save_rejected():
+    for tail_size in range(2, 22):
+        for alpha in range(1, 7):
+            start_time = time.time()
+            om = np.load("testing/om_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
+            om_topk = torch.topk(torch.from_numpy(om), k=1, dim=1)
+            is_rej_om = is_rejected_all(om_topk)
+            np.save("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), is_rej_om)
+            print("--- %s seconds ---" % (time.time() - start_time))
+    return True
+# -------------------------------------------------------------------------------------------------------------------
+
+
 def main_grid_search():
-    x, y = np.hsplit(np.load("preprocessing/c10_test_targ.npy", allow_pickle=True), 2)
-    targets = np.concatenate((np.full(10000, 10), x.flatten()))
+    # x, y = np.hsplit(np.load("preprocessing/c10_test_targ.npy", allow_pickle=True), 2)
+    # targets = np.concatenate((np.full(10000, 10), x.flatten()))
     is_positive = np.concatenate((np.full(10000, True), np.full(10000, False)))
-    auroc_sm_all = np.zeros((29, 8))
-    auroc_om_all = np.zeros((29, 8))
+    auroc_om_all = np.zeros((24, 6))
 
     counter = 0
-    for tail_size in range(2, 31):
-        for alpha in range(1, 9):
+    for tail_size in range(2, 26):
+        for alpha in range(1, 7):
             start_time = time.time()
-            openmax = np.load("testing/om_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
-            softmax = np.load("testing/sm_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
-            openmax_topk = torch.topk(torch.from_numpy(openmax), k=1, dim=1)
-            softmax_topk = torch.topk(torch.from_numpy(softmax), k=1, dim=1)
-            auroc_om_all[tail_size - 2][alpha - 1], is_rej_om = compute_auroc(openmax_topk, is_positive)
-            auroc_sm_all[tail_size - 2][alpha - 1], is_rej_sm = compute_auroc(softmax_topk, is_positive)
-            np.save("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), is_rej_om)
-            np.save("testing/rejected/sm_rej_a%d_t%d.npy" % (alpha, tail_size), is_rej_sm)
-            # openmax_same = (np.asarray(openmax_topk[1]).flatten() == targets)
-            # softmax_same = (np.asarray(softmax_topk[1]).flatten() == targets)
-            # auroc_om_all[targets-2][alpha-1] = compute_auroc_old(openmax, targets)
-            # auroc_sm_all[targets-2][alpha-1] = compute_auroc_old(softmax, targets)
+            is_rejected = np.load("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
+            auroc_om_all[tail_size - 2][alpha - 1] = compute_auroc(is_positive, is_rejected)
+            # auroc_sm_all[tail_size - 2][alpha - 1] = compute_auroc(is_positive, is_rejected)
             counter += 1
-            print("%s/232 " % (str(counter).zfill(3)), end="")
+            print("%s/50 " % (str(counter).zfill(3)), end="")
             print("--- %s seconds ---" % (time.time() - start_time))
     print(auroc_om_all)
-    print(auroc_sm_all)
     return 0
 # -------------------------------------------------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
     main_grid_search()
+    # save_rejected()
