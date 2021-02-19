@@ -105,6 +105,7 @@ def compute_auroc_old(om_sm, targets):
 
 
 def compute_auroc(is_positive, is_rejected):
+    # computes auroc for one combination of tail and alpha
     fpr, tpr = [], []
 
     for epsilon in range(101):
@@ -132,6 +133,38 @@ def compute_auroc(is_positive, is_rejected):
 
     auroc = slm.auc(fpr, tpr)
     return auroc
+# -------------------------------------------------------------------------------------------------------------------
+
+
+def compute_aupr(is_positive, is_rejected):
+    # computes aupr for one combination of tail and alpha
+    precision, recall = [], []  # tpr=recall
+
+    for epsilon in range(101):
+        tp, tn, fp, fn = 0, 0, 0, 0
+        for is_pos, is_rej in zip(is_positive, is_rejected[epsilon]):
+            if is_rej and is_pos:
+                tp += 1
+            elif not is_rej and not is_pos:
+                tn += 1
+            elif is_rej and not is_pos:
+                fp += 1
+            elif not is_rej and is_pos:
+                fn += 1
+
+        assert tp+tn+fp+fn == 20000
+
+        if not tp and not fp:
+            precision.append(0)
+        else:
+            precision.append(tp / (tp + fp))
+        if not tp and not fn:
+            recall.append(0)
+        else:
+            recall.append(tp / (tp + fn))
+
+    aupr = slm.auc(recall, precision)
+    return aupr
 # -------------------------------------------------------------------------------------------------------------------
 
 
@@ -184,27 +217,49 @@ def save_rejected():
 # -------------------------------------------------------------------------------------------------------------------
 
 
-def main_grid_search():
+def grid_auroc():
     # x, y = np.hsplit(np.load("preprocessing/c10_test_targ.npy", allow_pickle=True), 2)
     # targets = np.concatenate((np.full(10000, 10), x.flatten()))
     is_positive = np.concatenate((np.full(10000, True), np.full(10000, False)))
     auroc_om_all = np.zeros((24, 6))
-
+    is_rejected_sm = np.load("testing/rejected/sm_rej.npy", allow_pickle=True)
+    auroc_sm = compute_auroc(is_positive, is_rejected_sm)
     counter = 0
     for tail_size in range(2, 26):
         for alpha in range(1, 7):
-            start_time = time.time()
+            # start_time = time.time()
             is_rejected = np.load("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
             auroc_om_all[tail_size - 2][alpha - 1] = compute_auroc(is_positive, is_rejected)
-            # auroc_sm_all[tail_size - 2][alpha - 1] = compute_auroc(is_positive, is_rejected)
             counter += 1
-            print("%s/50 " % (str(counter).zfill(3)), end="")
-            print("--- %s seconds ---" % (time.time() - start_time))
+            # print("%s " % (str(counter).zfill(3)), end="")
+            # print("--- %s seconds ---" % (time.time() - start_time))
     print(auroc_om_all)
-    return 0
+    print(auroc_sm)
+    return auroc_om_all, auroc_sm
+# -------------------------------------------------------------------------------------------------------------------
+
+
+def grid_aupr():
+    is_positive = np.concatenate((np.full(10000, True), np.full(10000, False)))
+    aupr_om_all = np.zeros((24, 6))
+    is_rejected_sm = np.load("testing/rejected/sm_rej.npy", allow_pickle=True)
+    aupr_sm = compute_aupr(is_positive, is_rejected_sm)
+    counter = 0
+    for tail_size in range(2, 26):
+        for alpha in range(1, 7):
+            # start_time = time.time()
+            is_rejected = np.load("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
+            aupr_om_all[tail_size - 2][alpha - 1] = compute_aupr(is_positive, is_rejected)
+            counter += 1
+            # print("%s " % (str(counter).zfill(3)), end="")
+            # print("--- %s seconds ---" % (time.time() - start_time))
+    print(aupr_om_all)
+    print(aupr_sm)
+    return aupr_om_all, aupr_sm
 # -------------------------------------------------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
-    main_grid_search()
+    # grid_auroc()
+    grid_aupr()
     # save_rejected()
