@@ -106,7 +106,7 @@ def compute_auroc_old(om_sm, targets):
 
 def compute_auroc(is_positive, is_rejected):
     # computes auroc for one combination of tail and alpha
-    fpr, tpr = [], []
+    fpr, tpr = [], []  # tpr=recall
 
     for epsilon in range(101):
         tp, tn, fp, fn = 0, 0, 0, 0
@@ -204,6 +204,70 @@ def is_positive_all(targets):
 # -------------------------------------------------------------------------------------------------------------------
 
 
+def classification_accuracy(targets, predictions):
+    # sm = np.load("testing/sm.npy", allow_pickle=True)
+    # om = np.load("testing/om_a%d_t%d.npy" % (alpha,tail), allow_pickle=True)
+
+    ca = 0
+    for i in range(20000):
+        if targets[i] == np.argmax(predictions[i]):
+            ca += 1
+
+    ca = ca/20000.0
+    return ca
+# -------------------------------------------------------------------------------------------------------------------
+
+
+def classification_accuracy_epsilon(targets, predictions, epsilon):
+    # sm = np.load("testing/sm.npy", allow_pickle=True)
+    # om = np.load("testing/om_a%d_t%d.npy" % (alpha,tail), allow_pickle=True)
+
+    ca = 0
+    for i in range(20000):
+        argm = np.argmax(predictions[i])
+        max = predictions[i][argm]
+        if max >= epsilon and targets[i] == argm:
+            ca += 1
+        elif max < epsilon and targets[i] == 10:
+            ca += 1
+
+
+    ca = ca/20000.0
+    return ca
+# -------------------------------------------------------------------------------------------------------------------
+
+
+def find_recall_95(is_positive, is_rejected):
+    fpr, tpr = [], []  # tpr=recall
+
+    for epsilon in range(101):
+        tp, tn, fp, fn = 0, 0, 0, 0
+        for is_pos, is_rej in zip(is_positive, is_rejected[epsilon]):
+            if is_rej and is_pos:
+                tp += 1
+            elif not is_rej and not is_pos:
+                tn += 1
+            elif is_rej and not is_pos:
+                fp += 1
+            elif not is_rej and is_pos:
+                fn += 1
+
+        assert tp + tn + fp + fn == 20000
+
+        if not fp and not tn:
+            fpr.append(0)
+        else:
+            fpr.append(fp / (fp + tn))
+        if not tp and not fn:
+            tpr.append(0)
+        else:
+            tpr.append(tp / (tp + fn))
+
+    auroc = slm.auc(fpr, tpr)
+    return auroc
+# -------------------------------------------------------------------------------------------------------------------
+
+
 def save_rejected():
     for tail_size in range(2, 22):
         for alpha in range(1, 7):
@@ -259,7 +323,53 @@ def grid_aupr():
 # -------------------------------------------------------------------------------------------------------------------
 
 
+def grid_ca():
+    x, y = np.hsplit(np.load("preprocessing/c10_test_targ.npy", allow_pickle=True), 2)
+    targets = np.concatenate((np.full(10000, 10), x.flatten()))
+    sm = np.load("testing/sm.npy", allow_pickle=True)
+    ca_om = np.zeros((29, 8))
+    ca_sm = classification_accuracy(targets, sm)
+    # counter = 0
+    for tail_size in range(2, 31):
+        for alpha in range(1, 9):
+            om = np.load("testing/om_a%d_t%d.npy" % (alpha,tail_size), allow_pickle=True)
+            ca_om[tail_size - 2][alpha - 1] = classification_accuracy(targets, om)
+            # counter += 1
+            # print("%s " % (str(counter).zfill(3)), end="")
+            # print("--- %s seconds ---" % (time.time() - start_time))
+    print(ca_om)
+    print(ca_sm)
+    return ca_om, ca_sm
+# -------------------------------------------------------------------------------------------------------------------
+
+
+def grid_ca_eps():
+    x, y = np.hsplit(np.load("preprocessing/c10_test_targ.npy", allow_pickle=True), 2)
+    targets = np.concatenate((np.full(10000, 10), x.flatten()))
+    sm = np.load("testing/sm.npy", allow_pickle=True)
+    ca_om_all, ca_sm_all = [], []
+    for eps in range(0, 101, 10):
+        ca_om = np.zeros((29, 8))
+        ca_sm = classification_accuracy_epsilon(targets, sm, eps/100.0)
+        # counter = 0
+        for tail_size in range(2, 31):
+            for alpha in range(1, 9):
+                om = np.load("testing/om_a%d_t%d.npy" % (alpha,tail_size), allow_pickle=True)
+                ca_om[tail_size - 2][alpha - 1] = classification_accuracy_epsilon(targets, om, eps/100.0)
+                # counter += 1
+                # print("%s " % (str(counter).zfill(3)), end="")
+                # print("--- %s seconds ---" % (time.time() - start_time))
+        ca_sm_all.append(ca_sm)
+        ca_om_all.append(ca_om)
+    print(ca_om_all)
+    print(ca_sm_all)
+    return ca_om, ca_sm
+# -------------------------------------------------------------------------------------------------------------------
+
+
 if __name__ == "__main__":
     # grid_auroc()
-    grid_aupr()
+    # grid_aupr()
     # save_rejected()
+    grid_ca()
+    # grid_ca_eps()
