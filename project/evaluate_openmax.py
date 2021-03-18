@@ -150,7 +150,7 @@ def save_rejected():
             om = np.load("testing/om_a%d_t%d.npy" % (alpha, tail_size), allow_pickle=True)
             om_topk = torch.topk(torch.from_numpy(om), k=1, dim=1)
             is_rej_om = is_rejected_all(om_topk)
-            # np.save("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), is_rej_om)
+            np.save("testing/rejected/om_rej_a%d_t%d.npy" % (alpha, tail_size), is_rej_om)
             # print("--- %s seconds ---" % (time.time() - start_time))
     return True
 # -------------------------------------------------------------------------------------------------------------------
@@ -284,6 +284,5 @@ if __name__ == "__main__":
     # grid_auroc()
     # grid_aupr()
     # save_rejected()
-    # grid_ca_eps()
     # grid_ca_eps()
     grid_precision_recall()
