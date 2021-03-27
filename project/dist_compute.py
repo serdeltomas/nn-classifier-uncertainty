@@ -14,7 +14,7 @@ def compute_dist(mav,all_ok):
     return eucos
 
 # ------------------------------------------------------------------------------------------
-def compute_dist_from_mav():
+def compute_dist_to_mav():
     last_layer = np.load("preprocessing/c10_train_pred.npy", allow_pickle=1)
     targets = np.load("preprocessing/c10_train_targ.npy", allow_pickle=1)
     mav = np.load("preprocessing/mav_c10_train.npy", allow_pickle=1)
@@ -32,6 +32,6 @@ def compute_dist_from_mav():
 #------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    dist = compute_dist_from_mav()
+    dist = compute_dist_to_mav()
     np.save("preprocessing/dist_c10_train.npy", dist)
     print("eeeey")
