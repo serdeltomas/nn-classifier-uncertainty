@@ -1,13 +1,13 @@
 import numpy as np
 import torch
 
-def averagee(list):
+def averagee(correct_items_list):
     averagelist = []
-    for i in range (10):
-        sum = 0.0
-        for item in list:
-            sum += item[i]
-        averagelist.append(sum/(1.0*len(list)))
+    for i in range(10):
+        summ = 0.0
+        for item in correct_items_list:
+            summ += item[i]
+        averagelist.append(summ/(1.0*len(correct_items_list)))
     return averagelist
 
 #------------------------------------------------------------------------------------------
